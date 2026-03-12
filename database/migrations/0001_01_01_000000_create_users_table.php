@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('role',['user','admin'])->default('user');
             $table->string('PhoneNumber');
-            $table->string('status');
+            $table->enum('status', ['active','pending','blocked'])->default('active');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
