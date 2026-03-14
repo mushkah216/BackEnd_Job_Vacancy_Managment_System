@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\UserRequestLogin;
 use App\Http\Requests\User\UserRequestRegister;
 use App\Services\UserAuth\UserService;
 use Illuminate\Http\Request;
@@ -16,5 +17,8 @@ class UserController extends Controller
     }
     public function register(UserRequestRegister $request){
         return $this->user_service->register($request->validated());
+    }
+    public function login(UserRequestLogin $request){
+        return $this->user_service->login($request->validated());
     }
 }

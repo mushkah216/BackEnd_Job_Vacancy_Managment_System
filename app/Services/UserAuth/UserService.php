@@ -2,8 +2,10 @@
 
 namespace App\Services\UserAuth;
 
+use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Traits\ApiResponseTrait;
+use Illuminate\Support\Facades\Auth;
 
 class UserService
 {
@@ -19,5 +21,14 @@ class UserService
     public function register(array $input){
         $user=$this->user_repository->create($input);
         return $this->sendResponse([],'Register successfully',201);
+    }
+    public function login(array $input){
+        
+        if(!Auth::attempt(['email'=>$input['email'],'password'=>$input['password']]))
+            return $this->sendError('invalid email orpassword',401,[]);
+      // $user=User::where('email',$input['email'])->firstOrFail();
+        $user=$this->user_repository->getByEmail($input['email']);
+        $token=$user->createToken('authTok')->plainTextToken;
+        return $this->sendResponse([ 'token'=>$token],'login success');
     }
 }
