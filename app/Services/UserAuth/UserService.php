@@ -5,7 +5,9 @@ namespace App\Services\UserAuth;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Traits\ApiResponseTrait;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+ 
 
 class UserService
 {
@@ -30,5 +32,9 @@ class UserService
         $user=$this->user_repository->getByEmail($input['email']);
         $token=$user->createToken('authTok')->plainTextToken;
         return $this->sendResponse([ 'token'=>$token],'login success');
+    }
+    public function logout(Request $request){
+        $request->user()->currentAccessToken()->delete();
+        return $this->sendResponse([],'deleted successfully',203);
     }
 }

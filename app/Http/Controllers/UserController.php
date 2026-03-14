@@ -21,4 +21,7 @@ class UserController extends Controller
     public function login(UserRequestLogin $request){
         return $this->user_service->login($request->validated());
     }
+    public function logout(Request $request){
+        return $this->user_service->logout($request);
+    }
 }
