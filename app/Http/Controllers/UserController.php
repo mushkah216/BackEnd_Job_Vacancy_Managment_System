@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\UserRequestChangePassword;
 use App\Http\Requests\User\UserRequestLogin;
 use App\Http\Requests\User\UserRequestRegister;
+use App\Http\Requests\User\UserRequestUpdateProfile;
 use App\Services\UserAuth\UserService;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,15 @@ class UserController extends Controller
     public function changePassword(UserRequestChangePassword $request){
         return $this->user_service->changePassword($request->validated());
     }
-    // public function deleteAccount(){
-    //     return $this->user_service->deleteAccount();
+    public function getProfile(){
+        return $this->user_service->getProfile();
+    }
+    public function updateProfile(UserRequestUpdateProfile $request){
+        return $this->user_service->updateProfile($request->validated());
+    }
+
+    
+    // public function updateProfile(){
+    //     return $this->user_service->updateProfile();
     // }
 }

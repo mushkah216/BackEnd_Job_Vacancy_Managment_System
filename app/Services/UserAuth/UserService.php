@@ -2,6 +2,7 @@
 
 namespace App\Services\UserAuth;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Traits\ApiResponseTrait;
@@ -47,9 +48,15 @@ class UserService
         $user->save();
         return $this->sendResponse([],'change password sucessfully',201);
     }
-    // public function deleteAccount(){
-    //     $user=Auth::user();
-    //     $user->delete();
-    //     return $this->sendResponse([],'your account deleted successfully',203);
-    // }
+    public function getProfile(){
+        $user_id=Auth::user()->id;
+        $user=User::findOrFail($user_id);
+        return new UserResource($user);
+    }
+    public function updateProfile(array $input){
+        $user_id=Auth:: user()->id;
+        $user=User::findOrFail($user_id)->update($input);
+        return $this->sendResponse($user,'updated success',200);
+
+    }
 }
