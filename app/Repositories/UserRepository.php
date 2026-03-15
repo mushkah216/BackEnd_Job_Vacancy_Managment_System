@@ -22,7 +22,7 @@ class UserRepository
             return User::create($input);
         });
     }
-    public function getByEmail( $input){
-        return User::where('email',$input)->firstOrFail();
+    public function getByEmail( $email){
+        return User::where('email',$email)->firstOrFail();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\UserRequestChangePassword;
 use App\Http\Requests\User\UserRequestLogin;
 use App\Http\Requests\User\UserRequestRegister;
 use App\Services\UserAuth\UserService;
@@ -24,4 +25,10 @@ class UserController extends Controller
     public function logout(Request $request){
         return $this->user_service->logout($request);
     }
+    public function changePassword(UserRequestChangePassword $request){
+        return $this->user_service->changePassword($request->validated());
+    }
+    // public function deleteAccount(){
+    //     return $this->user_service->deleteAccount();
+    // }
 }
