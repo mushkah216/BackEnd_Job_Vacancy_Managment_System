@@ -21,4 +21,7 @@ class CompanyController extends Controller
     public function login(CompanyRequestLogin $request){
         return $this->company_service->login($request->validated());
     }
+    public function logout(Request $request){
+        return $this->company_service->logout($request);
+    }
 }

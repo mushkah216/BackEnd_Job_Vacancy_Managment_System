@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Company;
 use App\Traits\ApiResponseTrait;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -30,5 +31,10 @@ class CompanyService
         $token=$company->createToken('company')->plainTextToken;
 
         return $this->sendResponse(['token:'=>$token],'login sucess');
+    }
+    public function logout(Request $request){
+        $company=$request->user();
+        $company->currentAccessToken()->delete();
+        return $this->sendResponse([],'deleted success',203);
     }
 }

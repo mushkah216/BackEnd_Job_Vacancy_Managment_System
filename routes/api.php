@@ -20,4 +20,5 @@ Route::post('updateProfile',[UserController::class,'updateProfile'])->middleware
 //company
 Route::post('registerCompany',[CompanyController::class,'register']);
 Route::post('loginCompany',[CompanyController::class,'login']);
+Route::post('logoutCompany',[CompanyController::class,'logout'])->middleware(['auth:sanctum','CheckCompany']);
 
