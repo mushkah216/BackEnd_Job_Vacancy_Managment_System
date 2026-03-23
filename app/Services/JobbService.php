@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Resources\JobResource;
 use App\Models\Jobb;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,10 @@ class JobbService
         $company_id=Auth::user()->id;
         $jobs=Jobb::where('company_id',$company_id)->get();
         return $this->sendResponse($jobs,'get all jobs successfully',200);
+    }
+    public function getJob(Jobb $jobId){
+         $jobId->load('company');
+        return $this->sendResponse(new JobResource($jobId),'get job success',200);
     }
    
 }

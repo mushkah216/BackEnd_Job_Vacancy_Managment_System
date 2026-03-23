@@ -7,6 +7,7 @@ use App\Http\Requests\Company\CompanyRequestRegister;
 use App\Http\Requests\Job\CreateJobRequest;
 use App\Http\Requests\Jobb\JobbRequestLogin;
 use App\Http\Requests\Jobb\JobbRequestRegister;
+use App\Models\Jobb;
 use App\Services\CompanyService;
 use App\Services\JobbService;
 use App\Traits\ApiResponseTrait;
@@ -25,6 +26,10 @@ class JobbController extends Controller
     }
     public function getJobs(){
         return $this->jobb_service->getJobs();
+    }
+    public function getJob(Jobb $jobId){
+       
+        return $this->jobb_service->getJob($jobId);
     }
     
    
