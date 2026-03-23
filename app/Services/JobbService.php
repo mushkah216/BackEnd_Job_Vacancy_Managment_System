@@ -22,5 +22,10 @@ class JobbService
         $job=Jobb::create($input);
         return $this->sendResponse($job,'job created success');
     }
+    public function getJobs(){
+        $company_id=Auth::user()->id;
+        $jobs=Jobb::where('company_id',$company_id)->get();
+        return $this->sendResponse($jobs,'get all jobs successfully',200);
+    }
    
 }

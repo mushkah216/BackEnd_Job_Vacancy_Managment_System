@@ -23,6 +23,9 @@ class JobbController extends Controller
     public function addJob(CreateJobRequest $request){
         return $this->jobb_service->addJob($request->validated());
     }
+    public function getJobs(){
+        return $this->jobb_service->getJobs();
+    }
     
    
 }
