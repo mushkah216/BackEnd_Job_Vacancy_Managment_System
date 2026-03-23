@@ -32,5 +32,15 @@ class JobbService
          $jobId->load('company');
         return $this->sendResponse(new JobResource($jobId),'get job success',200);
     }
+    public function updateJob(array $input,$jobId){
+        $jobb=Jobb::where('id',$jobId)->firstOrFail();
+         $jobb->update($input);
+         $jobb->save();      
+        return $this->sendResponse([],'job updated successfully');
+    }
+    public function deleteJob(Jobb $jobId){
+        $jobId->delete();
+        return $this->sendResponse([],'deleted success',203);
+    }
    
 }

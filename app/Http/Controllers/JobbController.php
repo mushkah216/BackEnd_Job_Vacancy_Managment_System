@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Company\CompanyRequestLogin;
 use App\Http\Requests\Company\CompanyRequestRegister;
 use App\Http\Requests\Job\CreateJobRequest;
+use App\Http\Requests\Job\UpdateJobRequest;
 use App\Http\Requests\Jobb\JobbRequestLogin;
 use App\Http\Requests\Jobb\JobbRequestRegister;
 use App\Models\Jobb;
@@ -30,6 +31,12 @@ class JobbController extends Controller
     public function getJob(Jobb $jobId){
        
         return $this->jobb_service->getJob($jobId);
+    }
+    public function updateJob(UpdateJobRequest $request, $jobId){
+        return $this->jobb_service->updateJob($request->validated(),$jobId);
+    }
+    public function deleteJob(Jobb $jobId){
+        return $this->jobb_service->deleteJob($jobId);
     }
     
    
