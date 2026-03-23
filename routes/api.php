@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\JobbController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,4 +22,13 @@ Route::post('updateProfile',[UserController::class,'updateProfile'])->middleware
 Route::post('registerCompany',[CompanyController::class,'register']);
 Route::post('loginCompany',[CompanyController::class,'login']);
 Route::post('logoutCompany',[CompanyController::class,'logout'])->middleware(['auth:sanctum','CheckCompany']);
+
+//job-company
+Route::middleware(['auth:sanctum','CheckCompany'])->prefix('company')->group(function(){
+    Route::post('jobs',[JobbController::class,'addJob']);
+    Route::get('jobs',[JobbController::class,'getJobs']);
+    Route::get('job/{jobId}',[JobbController::class,'getJob']);
+    Route::put('job/{jobId}',[JobbController::class,'updateJob']);
+    Route::delete('job/{jobId}',[JobbController::class,'deleteJob']);
+});
 

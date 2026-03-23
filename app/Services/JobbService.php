@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Jobb;
 use App\Traits\ApiResponseTrait;
+use Illuminate\Support\Facades\Auth;
 
 class JobbService
 {
@@ -14,6 +15,12 @@ class JobbService
     public function __construct()
     {
         //
+    }
+    public function addJob(array $input){
+        $company_id=Auth::user()->id;
+        $input['company_id']=$company_id;
+        $job=Jobb::create($input);
+        return $this->sendResponse($job,'job created success');
     }
    
 }
