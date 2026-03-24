@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Console\View\Components\Task;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -59,11 +61,11 @@ class User extends Authenticatable
     }
 
     public function favourites(){
-        return $this->hasMany(Favourite::class);
+        return $this->belongsToMany(Jobb::class,'favourites');
     }
 
     public function saved_jobs(){
-        return $this->hasMany(Saved_Job::class);
+        return $this->belongsToMany(Jobb::class,'saved_jobs');
     }
 
     public function chats(){

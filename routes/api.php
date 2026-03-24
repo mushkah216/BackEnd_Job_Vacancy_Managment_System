@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\FavouriteJobController;
 use App\Http\Controllers\JobbController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -35,5 +36,11 @@ Route::middleware(['auth:sanctum','CheckCompany'])->prefix('company')->group(fun
 Route::middleware('auth:sanctum')->prefix('jobs')->group(function(){
     Route::get('',[JobbController::class,'showAllJob']);
     Route::get('{jobId}',[JobbController::class,'showJob']);
+});
+//favourit
+Route::middleware('auth:sanctum')->prefix('favourite')->group(function(){
+    Route::post('{jobId}',[FavouriteJobController::class,'addToFavourite']);
+    Route::delete('{jobId}',[FavouriteJobController::class,'removeFromFavourite']);
+    Route::get('',[FavouriteJobController::class,'getFavouriteJob']);
 });
 

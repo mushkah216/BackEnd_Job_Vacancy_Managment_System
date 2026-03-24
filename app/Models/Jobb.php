@@ -22,11 +22,11 @@ class Jobb extends Model
     }
 
     public function favourites(){
-        return $this->hasMany(Favourite::class);
+        return $this->belongsToMany(User::class,'favourites');
     }
 
     public function saved_jobs(){
-        return $this->hasMany(Saved_Job::class);
+        return $this->belongsToMany(User::class,'saved_jobs');
     }
 
     public function company(){
