@@ -4,7 +4,9 @@ namespace App\Services;
 
 use App\Http\Resources\JobResource;
 use App\Models\Jobb;
+use App\Models\User;
 use App\Traits\ApiResponseTrait;
+use Illuminate\Queue\Jobs\Job;
 use Illuminate\Support\Facades\Auth;
 
 class JobbService
@@ -41,6 +43,22 @@ class JobbService
     public function deleteJob(Jobb $jobId){
         $jobId->delete();
         return $this->sendResponse([],'deleted success',203);
+    }
+    public function showAllJob(){
+        $user=Auth::user();
+        if(!$user || !($user instanceof User)){
+            return $this->sendError('user not exist',404,[]);
+        }
+        $jobs=Jobb::all();
+        return $this->sendResponse($jobs,'return all job success');
+    }
+    public function showJob( $jobId){
+        $user=Auth::user();
+        if(!$user || !($user instanceof User)){
+            return $this->sendError('user not exist',404,[]);
+        }
+        $job=Jobb::where('id',$jobId)->get();
+        return $this->sendResponse($job,'return job success',200);
     }
    
 }

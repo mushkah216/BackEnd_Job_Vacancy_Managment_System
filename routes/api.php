@@ -31,4 +31,9 @@ Route::middleware(['auth:sanctum','CheckCompany'])->prefix('company')->group(fun
     Route::put('job/{jobId}',[JobbController::class,'updateJob']);
     Route::delete('job/{jobId}',[JobbController::class,'deleteJob']);
 });
+//job-user
+Route::middleware('auth:sanctum')->prefix('jobs')->group(function(){
+    Route::get('',[JobbController::class,'showAllJob']);
+    Route::get('{jobId}',[JobbController::class,'showJob']);
+});
 

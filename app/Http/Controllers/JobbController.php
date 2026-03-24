@@ -38,6 +38,12 @@ class JobbController extends Controller
     public function deleteJob(Jobb $jobId){
         return $this->jobb_service->deleteJob($jobId);
     }
+    public function showAllJob(){
+        return $this->jobb_service->showAllJob();
+    }
+    public function showJob( $jobId){
+        return $this->jobb_service->showJob($jobId);
+    }
     
    
 }
