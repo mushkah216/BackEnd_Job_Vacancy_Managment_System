@@ -24,6 +24,9 @@ Route::post('updateProfile',[UserController::class,'updateProfile'])->middleware
 Route::post('registerCompany',[CompanyController::class,'register']);
 Route::post('loginCompany',[CompanyController::class,'login']);
 Route::post('logoutCompany',[CompanyController::class,'logout'])->middleware(['auth:sanctum','CheckCompany']);
+Route::get('profileCompany',[CompanyController::class,'getProfile'])->middleware(['auth:sanctum','CheckCompany']);
+Route::post('updateProfileCom',[CompanyController::class,'updateProfile'])->middleware(['auth:sanctum','CheckCompany']);
+
 
 //job-company
 Route::middleware(['auth:sanctum','CheckCompany'])->prefix('company')->group(function(){

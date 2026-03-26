@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Http\Request;
@@ -36,5 +37,15 @@ class CompanyService
         $company=$request->user();
         $company->currentAccessToken()->delete();
         return $this->sendResponse([],'deleted success',203);
+    }
+    public function getProfile(){
+        $company_id=Auth::user()->id;
+        $company=Company::findOrFail($company_id);
+        return new CompanyResource($company);        
+    }
+    public function updateProfile(array $input){
+        $company_id=Auth::user()->id;
+        $company=Company::findOrFail($company_id)->update($input);
+        return $this->sendResponse([],'company updated success');
     }
 }

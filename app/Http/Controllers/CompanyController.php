@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Company\CompanyRequestLogin;
 use App\Http\Requests\Company\CompanyRequestRegister;
+use App\Http\Requests\Company\CompanyRequestUpdateProfile;
 use App\Services\CompanyService;
 use Illuminate\Http\Request;
 
@@ -23,5 +24,11 @@ class CompanyController extends Controller
     }
     public function logout(Request $request){
         return $this->company_service->logout($request);
+    }
+    public function getProfile(){
+        return $this->company_service->getProfile();
+    }
+    public function updateProfile(CompanyRequestUpdateProfile $request){
+        return $this->company_service->updateProfile($request->validated());
     }
 }
