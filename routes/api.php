@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\FavouriteJobController;
 use App\Http\Controllers\JobbController;
@@ -52,5 +53,12 @@ Route::middleware('auth:sanctum')->prefix('savedJob')->group(function(){
     Route::post('{jobId}',[SavedJobController::class,'addToSavedJob']);
     Route::delete('{jobId}',[SavedJobController::class,'removeFromSavedJob']);
     Route::get('',[SavedJobController::class,'getSavedJob']);
+});
+//user-application
+Route::middleware('auth:sanctum')->prefix('app')->group(function(){
+    Route::post('applay',[ApplicationController::class,'applay']);
+    Route::get('myApp',[ApplicationController::class,'getApplays']);
+    Route::get('detail/{appId}',[ApplicationController::class,'showDetails']);
+    Route::delete('app/{appId}',[ApplicationController::class,'removeApp']);
 });
 
