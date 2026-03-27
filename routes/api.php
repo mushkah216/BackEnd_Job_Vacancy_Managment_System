@@ -61,4 +61,10 @@ Route::middleware('auth:sanctum')->prefix('app')->group(function(){
     Route::get('detail/{appId}',[ApplicationController::class,'showDetails']);
     Route::delete('app/{appId}',[ApplicationController::class,'removeApp']);
 });
+//company-application
+Route::middleware(['auth:sanctum','CheckCompany'])->prefix('companyApp')->group(function(){
+    Route::get('all',[ApplicationController::class,'getAllApplication']);
+    Route::post('accept/{appId}',[ApplicationController::class,'acceptApplication']);
+    Route::post('reject/{appId}',[ApplicationController::class,'rejectApplication']);
+});
 

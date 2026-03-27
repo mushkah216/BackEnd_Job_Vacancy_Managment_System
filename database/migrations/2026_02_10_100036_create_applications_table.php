@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Jobb::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('cv');
             $table->string('cover_letter');
-           // $table->enum('status',['pending','reject','approved']);
+            $table->enum('status',['pending','reject','accept'])->default('accept');
             $table->timestamps();
         });
     }

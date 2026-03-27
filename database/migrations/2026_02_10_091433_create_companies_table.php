@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('website')->nullable();
             $table->string('logo')->nullable();
-            $table->enum('status',['pending','approved','rejected'])->default('pending');
+            $table->enum('status',['pending','approved','rejected'])->default('approved');
             $table->string('location');
             $table->timestamps();
             $table->softDeletes();

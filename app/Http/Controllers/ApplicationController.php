@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AcceptAppRequest;
 use App\Http\Requests\ApplayRequest;
 use App\Services\ApplicationService;
 use Illuminate\Http\Request;
@@ -25,6 +26,15 @@ class ApplicationController extends Controller
     }
     public function removeApp($appId){
         return $this->application_service->removeApp($appId);
+    }
+    public function getAllApplication(){
+        return $this->application_service->getAllApplication();
+    }
+    public function acceptApplication( $appId){
+        return $this->application_service->acceptApplication($appId);
+    }
+    public function rejectApplication($appId){
+        return $this->application_service->rejectApplication($appId);
     }
 
 }

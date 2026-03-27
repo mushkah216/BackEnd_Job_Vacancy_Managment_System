@@ -38,4 +38,29 @@ class ApplicationService
         Applications::where('id',$appId)->delete();
         return $this->sendResponse([],'deleted success',203);
     }
+    public function getAllApplication(){
+       // Auth::user();
+       $apps=Applications::all();
+       return  $this->sendResponse($apps,'this is all application');
+
+    }
+    public function acceptApplication($appId){
+        $app=Applications::find($appId);
+        if(!$app){
+            return $this->sendError('this id of application invalid',403,[]);
+        }
+       $app->status='accept';
+       $app->save();
+       return $this->sendResponse($app,'accept app success',201);
+      
+    }
+    public function rejectApplication($appId){
+        $app=Applications::find($appId);
+        if(!$app){
+            return $this->sendError('this id are invalid',403,[]);
+        }
+        $app->status='reject';
+        $app->save();
+        return $this->sendResponse($app,'reject success',201);
+    }
 }
