@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\FavouriteJobController;
@@ -66,5 +67,12 @@ Route::middleware(['auth:sanctum','CheckCompany'])->prefix('companyApp')->group(
     Route::get('all',[ApplicationController::class,'getAllApplication']);
     Route::post('accept/{appId}',[ApplicationController::class,'acceptApplication']);
     Route::post('reject/{appId}',[ApplicationController::class,'rejectApplication']);
+});
+//admin-user
+Route::middleware(['auth:sanctum','CheckAdmin'])->prefix('admin')->group(function(){
+    Route::get('users',[AdminController::class,'getAllUsers']);
+    Route::post('block/{userId}',[AdminController::class,'blockUser']);
+    Route::post('active/{userId}',[AdminController::class,'activedUser']);
+    Route::delete('user/{userId}',[AdminController::class,'deleteUser']);
 });
 
