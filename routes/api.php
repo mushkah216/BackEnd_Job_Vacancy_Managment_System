@@ -75,4 +75,11 @@ Route::middleware(['auth:sanctum','CheckAdmin'])->prefix('admin')->group(functio
     Route::post('active/{userId}',[AdminController::class,'activedUser']);
     Route::delete('user/{userId}',[AdminController::class,'deleteUser']);
 });
+//admin-company
+Route::middleware(['auth:sanctum','CheckAdmin'])->prefix('admin/company')->group(function(){
+    Route::get('all',[AdminController::class,'getAllCompany']);
+    Route::post('approved/{companyId}',[AdminController::class,'approvedCompany']);
+    Route::post('rejected/{companyId}',[AdminController::class,'rejectedCompany']);
+    Route::delete('{companyId}',[AdminController::class,'deleteCompany']);
+});
 

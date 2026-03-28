@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Company;
 use App\Models\User;
 use App\Traits\ApiResponseTrait;
 
@@ -50,5 +51,41 @@ class AdminService
         }
         $user->delete();
         return $this->sendResponse([],'users deleted success');
+    }
+    public function getAllCompany(){
+        $company=Company::get();
+        return $this->sendResponse($company,'get all success');
+    }
+    public function approvedCompany($companyId){
+        $company=Company::find($companyId);
+        if(!$company){
+            return $this->sendError('this company not found',404,[]);
+        }
+        if($company->status==='approved'){
+            return $this->sendError('company already approved',402,[]);
+        }
+        $company->status='approved';
+        $company->save();
+        return $this->sendResponse($company,'company approved success');
+    }
+    public function rejectedCompany($companyId){
+        $company=Company::find($companyId);
+        if(!$company){
+            return $this->sendError('company not found',404,[]);
+        }
+        if($company->status==='rejected'){
+            return $this->sendError('company already rejected',402,[]);
+        }
+        $company->status='rejected';
+        $company->save();
+        return $this->sendResponse($company,'rejected company  success');
+    }
+    public function deleteCompany($companyId){
+        $company=Company::find($companyId);
+        if(!$company){
+            return $this->sendError('this company not found',404,[]);
+        }
+        $company->delete();
+        return $this->sendResponse([],'company deleted success');
     }
 }

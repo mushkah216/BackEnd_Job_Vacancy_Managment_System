@@ -25,4 +25,16 @@ class AdminController extends Controller
     public function deleteUser($userId){
         return $this->admin_service->deleteUser($userId);
     }
+    public function getAllCompany(){
+        return $this->admin_service->getAllCompany();
+    }
+    public function approvedCompany($companyId){
+        return $this->admin_service->approvedCompany($companyId);
+    }
+    public function rejectedCompany($companyId){
+        return $this->admin_service->rejectedCompany($companyId);
+    }
+    public function deleteCompany($companyId){
+        return $this->admin_service->deleteCompany($companyId);
+    }
 }
